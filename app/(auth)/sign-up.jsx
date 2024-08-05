@@ -1,67 +1,77 @@
-import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../../constants";
-import FormFields from "../../components/FormFields";
-import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
-const SignIn = () => {
+import { images } from "../../constants";
+
+import { CustomButton, FormFields } from "../../components";
+
+const SignUp = () => {
+  const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const submit = () => {
-    console.log("works");
-  };
-
   return (
-    <SafeAreaView backgroundColor="#240750" height="100%">
+    <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        <View className="w-full justify-center h-full px-4 my-6">
+        <View
+          className="w-full flex justify-center h-full px-4 my-6"
+          style={{
+            minHeight: Dimensions.get("window").height - 100,
+          }}
+        >
           <Image
             source={images.logo}
             resizeMode="contain"
-            className="w-[115px] h-[35px]"
+            className="w-[115px] h-[34px]"
           />
 
-          <Text className="text-white text-2xl text-semibold mt-10 font-semibold">
-            Sign up to Aora
+          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
+            Sign Up to Aora
           </Text>
 
-          <FormFields
+          <FormField
             title="Username"
             value={form.username}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            handleChangeText={(e) => setForm({ ...form, username: e })}
+            otherStyles="mt-10"
           />
 
-          <FormFields
+          <FormField
             title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
+            otherStyles="mt-7"
             keyboardType="email-address"
           />
 
-          <FormFields
+          <FormField
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
+            otherStyles="mt-7"
           />
 
-          <CustomButton title="Register" handlePress={submit} />
+          <CustomButton
+            title="Sign Up"
+            handlePress={submit}
+            containerStyles="mt-7"
+            isLoading={isSubmitting}
+          />
 
-          <View className="justify-center pt-5 flex-row gap-2">
-            <Text className="text-green-100 font-extralight">
-              Already have an account
+          <View className="flex justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Have an account already?
             </Text>
             <Link
               href="/sign-in"
-              className="text-sm font-semibold text-yellow-600"
+              className="text-lg font-psemibold text-secondary"
             >
-              Sign In
+              Login
             </Link>
           </View>
         </View>
@@ -70,6 +80,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
-
-const styles = StyleSheet.create({});
+export default SignUp;

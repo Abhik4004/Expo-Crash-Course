@@ -3,7 +3,6 @@ import { ScrollView, Text, View, Image } from "react-native";
 import "expo-router/entry";
 import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Redirect, router } from "expo-router";
 import { styled } from "nativewind";
 import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
@@ -11,7 +10,7 @@ import CustomButton from "../components/CustomButton";
 const StyledSafeAreaView = styled(SafeAreaView);
 export default function App() {
   return (
-    <SafeAreaView className="h-full bg-custom-background" backgroundColor="">
+    <SafeAreaView className="h-full" backgroundColor="#240750">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
         <View className="w-full justify-center items-center h-full px-4 ">
           <Image
@@ -37,7 +36,8 @@ export default function App() {
 
             <CustomButton
               title="Continue with email"
-              handlePress={() => router.push("/sign-in")}
+              handlPress={() => console.log("CLicked")}
+              containerStyles="w-full mt-7"
             />
           </View>
         </View>
@@ -45,4 +45,16 @@ export default function App() {
       <StatusBar backgroundColor="#240750" style="light" />
     </SafeAreaView>
   );
+}
+
+{
+  /*
+  <View style={styles.container} className="bg-blue-500">
+      <Text>Aora!</Text>
+      <StatusBar style="auto" />
+      <Link href="/profile" style={{ color: "blue" }}>
+        Go to profile
+      </Link>
+    </View>
+  */
 }
